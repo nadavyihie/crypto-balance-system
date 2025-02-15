@@ -1,0 +1,17 @@
+[
+  {
+    "userId": "1",
+    "asset": "BTC",
+    "amount": 21
+  },
+  {
+    "userId": "1",
+    "asset": "ETH",
+    "amount": 2
+  },
+  {
+    "userId": "2",
+    "asset": "BTC",
+    "amount": 0.5
+  }
+]
