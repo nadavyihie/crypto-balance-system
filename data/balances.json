@@ -1,17 +1,27 @@
 [
   {
-    "userId": "1",
-    "asset": "BTC",
-    "amount": 21
-  },
-  {
-    "userId": "1",
-    "asset": "ETH",
+    "userId": "2",
+    "asset": "ethereum",
     "amount": 2
   },
   {
-    "userId": "2",
-    "asset": "BTC",
+    "userId": "1",
+    "asset": "bitcoin",
     "amount": 0.5
+  },
+  {
+    "userId": "2",
+    "asset": "bitcoin",
+    "amount": 0.5
+  },
+  {
+    "userId": "1",
+    "asset": "cardano",
+    "amount": 100
+  },
+  {
+    "userId": "2",
+    "asset": "dogecoin",
+    "amount": 100
   }
 ]

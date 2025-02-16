@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { RateController } from './rate.controller';
 import { RateService } from './rate.service';
+import { RateController } from './rate.controller';
 import { SharedModule } from '@app/shared';
 import { ScheduleModule } from '@nestjs/schedule';
 
