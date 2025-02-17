@@ -79,12 +79,13 @@ A microservices-based cryptocurrency portfolio management system that allows use
 
 Get current rates:
 ```bash
-curl http://localhost:3001/rates?currency=usd
+curl http://localhost:PORT_NUMBER_1/balances \
+  -H "X-User-ID: 1"
 ```
 
 Add balance:
 ```bash
-curl -X POST http://localhost:3000/balances \
+curl -X POST http://localhost:PORT_NUMBER_2/balances \
   -H "X-User-ID: 1" \
   -H "Content-Type: application/json" \
   -d '{"asset": "bitcoin", "amount": 1.5}'
