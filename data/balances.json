@@ -1,0 +1,32 @@
+[
+  {
+    "userId": "4",
+    "asset": "polkadot",
+    "amount": 39595.841995842
+  },
+  {
+    "userId": "4",
+    "asset": "tether",
+    "amount": 152364.80000000002
+  },
+  {
+    "userId": "4",
+    "asset": "cardano",
+    "amount": 48451.42226965312
+  },
+  {
+    "userId": "1",
+    "asset": "polkadot",
+    "amount": 0
+  },
+  {
+    "userId": "1",
+    "asset": "tether",
+    "amount": 0
+  },
+  {
+    "userId": "1",
+    "asset": "cardano",
+    "amount": 0
+  }
+]
