@@ -2,31 +2,36 @@
   {
     "userId": "4",
     "asset": "polkadot",
-    "amount": 39595.841995842
+    "amount": 35
   },
   {
     "userId": "4",
     "asset": "tether",
-    "amount": 152364.80000000002
+    "amount": 152
   },
   {
     "userId": "4",
     "asset": "cardano",
-    "amount": 48451.42226965312
+    "amount": 484
   },
   {
     "userId": "1",
     "asset": "polkadot",
-    "amount": 0
+    "amount": 5
   },
   {
     "userId": "1",
     "asset": "tether",
-    "amount": 0
+    "amount": 9
   },
   {
     "userId": "1",
     "asset": "cardano",
-    "amount": 0
+    "amount": 5
+  },
+  {
+    "userId": "1",
+    "asset": "bitcoin",
+    "amount": 2
   }
 ]
