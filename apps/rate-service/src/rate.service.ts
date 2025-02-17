@@ -3,20 +3,14 @@ import { FileService } from "@app/shared/modules/file/file.service";
 import { CustomLoggerService } from "@app/shared/modules/logging/logging.service";
 import axios from "axios";
 import { Cron } from "@nestjs/schedule";
-import { RatesCollection, Rate } from "@app/shared/interfaces/rate.interface";
-
+import { RatesCollection } from "@app/shared/interfaces/rate.interface";
+import { SupportedAsset, SupportedCurrency } from "@app/shared/enums";
+import { Validator } from "@app/shared/validators/validator";
 
 @Injectable()
 export class RateService implements OnModuleInit {
-  private readonly ASSETS = [
-    "polkadot",
-    "dogecoin",
-    "bitcoin",
-    "ethereum",
-    "tether",
-    "cardano",
-  ];
-  private readonly CURRENCIES = ["usd", "eur", "gbp", "ils"];
+  private readonly ASSETS = Object.values(SupportedAsset);
+  private readonly CURRENCIES = Object.values(SupportedCurrency);
   private readonly RATES_FILE = "data/rates.json";
   private readonly COINGECKO_API_URL =
     "https://api.coingecko.com/api/v3/simple/price";
@@ -32,7 +26,9 @@ export class RateService implements OnModuleInit {
   async onModuleInit() {
     this.logger.log("Initializing RateService");
     try {
-      const savedRates = await this.fileService.readJson<RatesCollection>(this.RATES_FILE);
+      const savedRates = await this.fileService.readJson<RatesCollection>(
+        this.RATES_FILE
+      );
       if (savedRates) {
         this.rates = savedRates;
         this.logger.log("Loaded rates from file");
@@ -46,15 +42,18 @@ export class RateService implements OnModuleInit {
   async updateRates() {
     try {
       this.logger.log("Updating cryptocurrency rates");
-      const response = await axios.get<RatesCollection>(this.COINGECKO_API_URL, {
-        headers: {
+      const response = await axios.get<RatesCollection>(
+        this.COINGECKO_API_URL,
+        {
+          headers: {
             "x-cg-pro-api-key": this.API_KEY,
           },
-        params: {
-          ids: this.ASSETS.join(","),
-          vs_currencies: this.CURRENCIES.join(","),
-        },
-      });
+          params: {
+            ids: this.ASSETS.join(","),
+            vs_currencies: this.CURRENCIES.join(","),
+          },
+        }
+      );
       this.rates = response.data;
 
       await this.fileService.writeJson(this.RATES_FILE, this.rates);
@@ -65,10 +64,16 @@ export class RateService implements OnModuleInit {
   }
 
   async getCurrencyRates(currency: string): Promise<Record<string, number>> {
-    const ratesByCurrency: Record<string, number> = {};
-    for (const asset of this.ASSETS) {
-      ratesByCurrency[asset] = this.rates[asset][currency];
+    try {
+      Validator.validateCurrency(currency);
+      const ratesByCurrency: Record<string, number> = {};
+      for (const asset of this.ASSETS) {
+        ratesByCurrency[asset] = this.rates[asset][currency];
+      }
+      return ratesByCurrency;
+    } catch (error) {
+      this.logger.error("Failed to get currency rates:", error.stack);
+      throw error;
     }
-    return ratesByCurrency;
   }
 }

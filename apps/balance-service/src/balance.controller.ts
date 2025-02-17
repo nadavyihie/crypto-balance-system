@@ -21,9 +21,9 @@ export class BalanceController {
   @Delete()
   deleteBalance(
     @Headers('X-User-ID') userId: string,
-    @Body() body: { asset: string },
+    @Query('asset') asset: string,
   ) {
-    return this.balanceService.deleteBalance(userId, body.asset);
+    return this.balanceService.deleteBalance(userId, asset);
   }
 
   @Get('total')
@@ -32,5 +32,13 @@ export class BalanceController {
     @Query('currency') currency: string,
   ) {
     return this.balanceService.getTotalBalancesValue(userId, currency);
+  }
+
+  @Post('rebalance')
+  rebalancePortfolio(
+    @Headers('X-User-ID') userId: string,
+    @Body() targetPercentages: { asset: string; percentage: number }[]
+  ) {
+    return this.balanceService.rebalance(userId, targetPercentages);
   }
 } 
